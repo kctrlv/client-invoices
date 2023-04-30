@@ -21,7 +21,6 @@ RSpec.describe "Api::V1::Clients", type: :request do
       expect {
         post '/api/v1/clients', params: { client: invalid_attributes }
       }.to_not change(Client, :count)
-
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
@@ -30,10 +29,26 @@ RSpec.describe "Api::V1::Clients", type: :request do
     it "returns a list of our clients" do
       Client.create(name: "Waldo")
       get '/api/v1/clients'
-      expect(response).to have_http_status(200)
-      response_body = JSON.parse(response.body)
-      expect(response_body).to be_an(Array)
-      expect(response_body[0]['name']).to match("Waldo")
+      expect(response).to have_http_status(:success)
+
+      expect(JSON.parse(response.body)).to be_an(Array)
+      expect(JSON.parse(response.body)[0]['name']).to eq("Waldo")
+    end
+  end
+
+  describe 'GET /api/v1/clients/:id' do
+    it 'returns the client when the client exists' do
+      Client.create(name: "Waldo")
+      get "/api/v1/clients/1"
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)['id']).to eq(1)
+      expect(JSON.parse(response.body)['name']).to eq("Waldo")
+    end
+
+    it 'returns not found when client does not exist' do
+      get '/api/v1/clients/9999'
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
