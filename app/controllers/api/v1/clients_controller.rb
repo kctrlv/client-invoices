@@ -1,4 +1,9 @@
 class Api::V1::ClientsController < ActionController::API
+  def index
+    @clients = Client.all
+    render json: @clients  
+  end
+
   def create
     @client = Client.new(client_params)
   
