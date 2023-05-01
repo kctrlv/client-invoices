@@ -1,24 +1,29 @@
-# README
+# Client Invoices
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Rails API project with some basic functionality to create and track invoices for clients
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+To get started with this project, you'll need to have the following software installed on your computer:
 
-* System dependencies
+- Ruby 3.2.2
+- Rails 7.0.4.3
 
-* Configuration
+Once those are installed, follow these steps to get up an running
 
-* Database creation
+1. Clone this repository to your local machine: `git clone https://github.com/kctrlv/client-invoices.git`
+2. Change into the project directory: `cd client-invoices`
+3. Install the required gems: `bundle install`
+4. Create the database: `rails db:create`
+5. Run the database migrations: `rails db:migrate`
+6. Start the server: `rails server`
 
-* Database initialization
+The API should now be running on `http://localhost:3000`.
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This API has a few important endpoints, 
+- GET `/api/v1/clients` will return a list of all the clients, and their nested invoices.
+- GET `/api/v1/clients/1` will return a the first client in the system
+- POST `/api/v1/clients/1/invoices` will create a new invoice for the given client
+- PUT `/api/v1/clients/1/invoices` will update the invoice, example body: `{"invoice": {"status": "approved"}}`
