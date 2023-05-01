@@ -1,13 +1,13 @@
 class Api::V1::ClientsController < ActionController::API
   def index
     @clients = Client.all
-    render json: @clients  
+    render json: @clients, include: [:invoices]
   end
 
   def show
     @client = Client.find_by(id: params[:id])
     if @client
-      render json: @client
+      render json: @client, include: [:invoices]
     else
       render json: { error: 'Client not found' }, status: :not_found
     end
