@@ -47,7 +47,7 @@ RSpec.describe "Api::V1::Clients", type: :request do
     end
 
     it 'returns not found when client does not exist' do
-      get '/api/v1/clients/9999'
+      get '/api/v1/clients/42099'
       expect(response).to have_http_status(:not_found)
     end
   end
