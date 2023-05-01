@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_215914) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_141643) do
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_215914) do
     t.integer "client_id", null: false
     t.string "number"
     t.decimal "amount"
-    t.string "status"
+    t.integer "status", default: 1, null: false
     t.date "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
